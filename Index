@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rebeca Solução IA</title>
+<meta name="description" content="Web apps, automações e agentes de IA para pequenos e médios negócios.">
+<meta name="theme-color" content="#0E4A37">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde-escuro:#0E4A37;
+    --verde:#1C8A55;
+    --verde-claro:#5CC27A;
+    --menta:#EAF7EE;
+    --menta-2:#D6F0DE;
+    --texto:#16352B;
+    --texto-suave:#4F6B60;
+    --branco:#FFFFFF;
+    --borda:#CFE6D7;
+    --erro:#B3261E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    background:var(--menta);
+    color:var(--texto);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px}
+
+  /* HERO */
+  header{
+    position:relative;overflow:hidden;
+    padding:44px 0 36px;text-align:center;
+  }
+  header::before,header::after{
+    content:"";position:absolute;border-radius:50%;
+    background:var(--menta-2);z-index:0;
+  }
+  header::before{width:260px;height:260px;top:-120px;left:-110px}
+  header::after{width:220px;height:220px;bottom:-130px;right:-90px}
+  header .wrap{position:relative;z-index:1}
+  .logo{width:132px;height:auto;display:block;margin:0 auto 14px}
+  .logo-fallback{
+    width:96px;height:96px;margin:0 auto 14px;border-radius:50%;
+    background:linear-gradient(135deg,var(--verde-escuro),var(--verde-claro));
+    color:#fff;font-weight:800;font-size:44px;
+    display:none;align-items:center;justify-content:center;
+  }
+  .marca{font-weight:800;font-size:30px;letter-spacing:2px;color:var(--verde-escuro);line-height:1.1}
+  .marca-sub{font-weight:500;font-size:20px;letter-spacing:1.5px;color:var(--verde-escuro)}
+  .marca-sub b{color:var(--verde-claro);font-weight:700}
+  .tag{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--texto-suave);margin-top:6px}
+  .hero-titulo{font-size:22px;font-weight:700;margin:26px auto 10px;max-width:520px;line-height:1.3}
+  .hero-texto{color:var(--texto-suave);max-width:520px;margin:0 auto 22px;font-size:15px}
+  .btn{
+    display:inline-block;border:none;cursor:pointer;
+    background:var(--verde);color:#fff;font:inherit;font-weight:700;font-size:16px;
+    padding:15px 28px;border-radius:999px;text-decoration:none;
+    box-shadow:0 6px 18px rgba(28,138,85,.28);
+    transition:transform .15s, background .15s;
+  }
+  .btn:hover{background:var(--verde-escuro)}
+  .btn:active{transform:scale(.98)}
+  .btn[disabled]{opacity:.7;cursor:wait}
+
+  section{padding:30px 0}
+  h2{font-size:21px;font-weight:800;color:var(--verde-escuro);margin-bottom:6px}
+  .sec-sub{color:var(--texto-suave);font-size:14.5px;margin-bottom:18px}
+
+  /* SERVIÇOS */
+  .cards{display:grid;gap:14px}
+  .card{
+    background:var(--branco);border:1px solid var(--borda);border-radius:18px;
+    padding:20px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .ico{
+    flex:0 0 46px;height:46px;border-radius:14px;
+    background:var(--menta);display:flex;align-items:center;justify-content:center;
+    color:var(--verde);
+  }
+  .ico svg{width:24px;height:24px}
+  .card h3{font-size:16.5px;font-weight:700;margin-bottom:4px}
+  .card p{font-size:14px;color:var(--texto-suave)}
+  .card ul{margin-top:8px;padding-left:18px;font-size:13.5px;color:var(--texto-suave)}
+  .card li{margin:2px 0}
+
+  /* COMO FUNCIONA */
+  .passos{display:grid;gap:12px;counter-reset:p}
+  .passo{display:flex;gap:14px;align-items:flex-start}
+  .passo::before{
+    counter-increment:p;content:counter(p);
+    flex:0 0 34px;height:34px;border-radius:50%;
+    background:var(--verde-escuro);color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:15px;
+  }
+  .passo strong{display:block;font-size:15px}
+  .passo span{font-size:14px;color:var(--texto-suave)}
+
+  /* FORM */
+  .form-box{
+    background:var(--branco);border:1px solid var(--borda);border-radius:22px;
+    padding:24px 20px;box-shadow:0 10px 30px rgba(14,74,55,.06);
+  }
+  .campo{margin-bottom:16px}
+  label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+  input,select,textarea{
+    width:100%;font:inherit;font-size:16px;color:var(--texto);
+    border:1.5px solid var(--borda);border-radius:12px;padding:12px 14px;
+    background:#FBFEFC;outline:none;transition:border-color .15s;
+  }
+  textarea{min-height:110px;resize:vertical}
+  input:focus,select:focus,textarea:focus{border-color:var(--verde)}
+  .opcoes{display:grid;gap:8px}
+  .opcao{
+    display:flex;align-items:center;gap:10px;font-weight:500;font-size:14.5px;
+    border:1.5px solid var(--borda);border-radius:12px;padding:11px 14px;cursor:pointer;
+    background:#FBFEFC;margin:0;
+  }
+  .opcao input{width:18px;height:18px;accent-color:var(--verde);flex:0 0 18px}
+  .opcao:has(input:checked){border-color:var(--verde);background:var(--menta)}
+  .msg-erro{color:var(--erro);font-size:13px;margin-top:5px;display:none}
+  .campo.invalido .msg-erro{display:block}
+  .campo.invalido input,.campo.invalido select,.campo.invalido textarea{border-color:var(--erro)}
+  .form-box .btn{width:100%;margin-top:6px}
+  .nota{font-size:12.5px;color:var(--texto-suave);text-align:center;margin-top:12px}
+
+  footer{text-align:center;padding:30px 0 40px;font-size:13px;color:var(--texto-suave)}
+  footer a{color:var(--verde);font-weight:600;text-decoration:none}
+
+  @media (min-width:640px){
+    .cards{grid-template-columns:1fr}
+    .hero-titulo{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="logo" src="logo.png" alt="Rebeca Solução IA"
+         onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='flex'">
+    <div class="logo-fallback">R</div>
+    <div class="marca">REBECA</div>
+    <div class="marca-sub">SOLUÇÃO <b>IA</b></div>
+    <div class="tag">Web apps, automação e agentes inteligentes</div>
+
+    <h1 class="hero-titulo">Tecnologia sob medida para o seu negócio trabalhar menos no manual e atender melhor.</h1>
+    <p class="hero-texto">Ajudo pequenos e médios negócios com agentes de IA no WhatsApp, automações e web apps simples, acessíveis e integrados ao que você já usa.</p>
+    <a href="#contato" class="btn">Quero uma solução</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="servicos">
+    <h2>O que eu faço</h2>
+    <p class="sec-sub">Três formas de economizar tempo e não perder clientes.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.1A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></svg>
+        </div>
+        <div>
+          <h3>Agentes de IA</h3>
+          <p>Um atendente virtual que responde seus clientes no WhatsApp e Instagram, 24 horas por dia.</p>
+          <ul>
+            <li>Tira dúvidas, informa preços e disponibilidade</li>
+            <li>Consulta suas planilhas e sistemas</li>
+            <li>Passa para você quando precisa de um humano</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 14h6v6h-6z"/><path d="M10 7h4a3 3 0 0 1 3 3v4"/><path d="M15 12l2 2 2-2"/></svg>
+        </div>
+        <div>
+          <h3>Automações</h3>
+          <p>Tarefas repetitivas que passam a acontecer sozinhas, sem você precisar lembrar.</p>
+          <ul>
+            <li>Avisos e lembretes automáticos</li>
+            <li>Planilhas que se preenchem e se atualizam</li>
+            <li>Integração entre os aplicativos que você usa</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/><path d="M9 7h6M9 10.5h6M9 14h3"/></svg>
+        </div>
+        <div>
+          <h3>Web apps</h3>
+          <p>Aplicativos sob medida para o seu negócio, com custo acessível.</p>
+          <ul>
+            <li>Instala direto no celular, sem App Store ou Google Play</li>
+            <li>Integrado à planilha do Google</li>
+            <li>Cadastros, pedidos, agendamentos, controles e mais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Como funciona</h2>
+    <p class="sec-sub">Simples, do primeiro contato até a solução funcionando.</p>
+    <div class="passos">
+      <div class="passo"><div><strong>Você me conta sua necessidade</strong><span>Preencha o formulário abaixo em menos de 1 minuto.</span></div></div>
+      <div class="passo"><div><strong>Conversamos pelo WhatsApp</strong><span>Entendo o seu negócio e te mostro o que é possível fazer.</span></div></div>
+      <div class="passo"><div><strong>Você recebe uma proposta</strong><span>Com escopo, prazo e valor claros, sem surpresas.</span></div></div>
+      <div class="passo"><div><strong>Solução funcionando</strong><span>Com ajustes inclusos no primeiro mês de uso.</span></div></div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <h2>Vamos conversar?</h2>
+    <p class="sec-sub">Preencha os dados e você será direcionado para o meu WhatsApp.</p>
+
+    <form class="form-box" id="form" novalidate>
+      <div class="campo">
+        <label for="nome">Seu nome</label>
+        <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Como posso te chamar?">
+        <div class="msg-erro">Informe seu nome.</div>
+      </div>
+
+      <div class="campo">
+        <label for="whatsapp">WhatsApp (com DDD)</label>
+        <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(27) 99999-9999">
+        <div class="msg-erro">Informe um WhatsApp válido com DDD.</div>
+      </div>
+
+      <div class="campo">
+        <label for="negocio">Tipo de negócio</label>
+        <input id="negocio" name="negocio" type="text" placeholder="Ex.: loja de roupas, clínica, pousada…">
+        <div class="msg-erro">Conte qual é o seu tipo de negócio.</div>
+      </div>
+
+      <div class="campo" id="campo-servico">
+        <label>Qual serviço te interessa?</label>
+        <div class="opcoes">
+          <label class="opcao"><input type="checkbox" name="servico" value="Agente de IA"> Agente de IA (WhatsApp / Instagram)</label>
+          <label class="opcao"><input type="checkbox" name="servico" value="Automação"> Automação</label>
+          <label class="opcao"><input type="checkbox" name="servico" value="Web app"> Web app</label>
+          <label class="opcao"><input type="checkbox" name="servico" value="Ainda não sei"> Ainda não sei, quero orientação</label>
+        </div>
+        <div class="msg-erro">Escolha pelo menos uma opção.</div>
+      </div>
+
+      <div class="campo">
+        <label for="necessidade">Conte brevemente sua necessidade</label>
+        <textarea id="necessidade" name="necessidade" placeholder="Ex.: perco muito tempo respondendo as mesmas perguntas no WhatsApp…"></textarea>
+        <div class="msg-erro">Escreva uma breve descrição.</div>
+      </div>
+
+      <button class="btn" type="submit" id="enviar">Enviar e falar no WhatsApp</button>
+      <p class="nota">Seus dados são usados apenas para retornar o seu contato.</p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Rebeca Solução IA · Web apps, automação e agentes inteligentes</p>
+    <p><a href="https://instagram.com/rebeca.solucao.ia" target="_blank" rel="noopener">@rebeca.solucao.ia</a></p>
+  </div>
+</footer>
+
+<script>
+  /* ===== CONFIGURAÇÃO — preencha estes dois campos ===== */
+  const WHATSAPP_NUMERO = "5527998686886";   // DDI 55 + DDD + número, só dígitos. Ex.: 5527999999999
+  const URL_PLANILHA    = "https://script.google.com/macros/s/AKfycbyNynXPbxfxt2TP3FXamrJxHJnlYeLckh2XRMfKINZfp62jhLVRx9hJR2yse1PUiYEJlg/exec"; // termina em /exec
+  /* ===================================================== */
+
+  // Máscara simples do WhatsApp
+  const tel = document.getElementById('whatsapp');
+  tel.addEventListener('input', () => {
+    let d = tel.value.replace(/\D/g,'').slice(0,11);
+    if (d.length > 6) tel.value = `(${d.slice(0,2)}) ${d.slice(2, d.length-4)}-${d.slice(-4)}`;
+    else if (d.length > 2) tel.value = `(${d.slice(0,2)}) ${d.slice(2)}`;
+    else tel.value = d;
+  });
+
+  const form = document.getElementById('form');
+  const botao = document.getElementById('enviar');
+
+  function marcar(id, ok){
+    document.getElementById(id).closest('.campo').classList.toggle('invalido', !ok);
+    return ok;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nome = form.nome.value.trim();
+    const whatsapp = form.whatsapp.value.trim();
+    const negocio = form.negocio.value.trim();
+    const servicos = [...form.querySelectorAll('input[name="servico"]:checked')].map(i => i.value);
+    const necessidade = form.necessidade.value.trim();
+
+    let ok = true;
+    ok = marcar('nome', nome.length > 1) && ok;
+    ok = marcar('whatsapp', whatsapp.replace(/\D/g,'').length >= 10) && ok;
+    ok = marcar('negocio', negocio.length > 1) && ok;
+    document.getElementById('campo-servico').classList.toggle('invalido', servicos.length === 0);
+    ok = servicos.length > 0 && ok;
+    ok = marcar('necessidade', necessidade.length > 3) && ok;
+    if (!ok) {
+      form.querySelector('.invalido').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    botao.disabled = true;
+    botao.textContent = 'Enviando…';
+
+    const dados = { nome, whatsapp, negocio, servico: servicos.join(', '), necessidade };
+
+    // 1) Salva na planilha (se falhar, o contato ainda segue para o WhatsApp)
+    try {
+      if (URL_PLANILHA.startsWith('https://')) {
+        await Promise.race([
+          fetch(URL_PLANILHA, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(dados)
+          }),
+          new Promise(r => setTimeout(r, 6000))
+        ]);
+      }
+    } catch (err) { console.warn('Falha ao salvar na planilha', err); }
+
+    // 2) Abre o WhatsApp com a mensagem pronta
+    const texto =
+`Olá, Rebeca! Vim pelo Instagram 😊
+*Nome:* ${nome}
+*Negócio:* ${negocio}
+*Interesse:* ${dados.servico}
+*Necessidade:* ${necessidade}`;
+    window.location.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
+
+    setTimeout(() => { botao.disabled = false; botao.textContent = 'Enviar e falar no WhatsApp'; }, 3000);
+  });
+
+  // Permite instalar no celular
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  }
+</script>
+</body>
+</html>
