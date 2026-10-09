@@ -1,0 +1,16 @@
+{
+  "name": "Rebeca Solução IA",
+  "short_name": "Rebeca IA",
+  "description": "Web apps, automações e agentes de IA para pequenos e médios negócios.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EAF7EE",
+  "theme_color": "#0E4A37",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
