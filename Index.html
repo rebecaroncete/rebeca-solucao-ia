@@ -133,6 +133,45 @@
   .form-box .btn{width:100%;margin-top:6px}
   .nota{font-size:12.5px;color:var(--texto-suave);text-align:center;margin-top:12px}
 
+  /* PLANOS */
+  .abas{display:flex;gap:6px;background:var(--branco);border:1px solid var(--borda);border-radius:999px;padding:5px;margin-bottom:18px}
+  .aba{
+    flex:1;border:none;background:none;font:inherit;font-weight:600;font-size:14px;
+    color:var(--texto-suave);padding:10px 6px;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:13.5px;
+  }
+  .aba[aria-selected="true"]{background:var(--verde-escuro);color:#fff}
+  .painel[hidden]{display:none}
+  .painel-sub{font-size:14px;color:var(--texto-suave);margin-bottom:14px}
+  .planos{display:grid;gap:14px}
+  .plano{
+    position:relative;background:var(--branco);border:1px solid var(--borda);
+    border-radius:18px;padding:20px;
+  }
+  .plano.destaque{border:2px solid var(--verde);box-shadow:0 10px 26px rgba(28,138,85,.14)}
+  .selo{
+    position:absolute;top:-11px;left:20px;background:var(--verde);color:#fff;
+    font-size:10.5px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px;
+  }
+  .plano h3{font-size:17px;font-weight:800;color:var(--verde-escuro)}
+  .plano .inclui{font-size:13.5px;font-weight:600;margin-top:2px}
+  .plano .desc{font-size:13.5px;color:var(--texto-suave);margin-top:4px}
+  .preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:12px}
+  .preco .de{font-size:13px;color:var(--texto-suave);text-decoration:line-through}
+  .preco .por{font-size:24px;font-weight:800;color:var(--verde-escuro)}
+  .preco .por small{font-size:12px;font-weight:600;color:var(--texto-suave)}
+  .preco .mes{font-size:14px;font-weight:700;color:var(--verde)}
+  .plano .btn-plano{
+    display:inline-block;margin-top:14px;font:inherit;font-weight:700;font-size:14px;
+    color:var(--verde);background:var(--menta);border:1.5px solid var(--borda);
+    padding:10px 18px;border-radius:999px;cursor:pointer;
+  }
+  .plano.destaque .btn-plano{background:var(--verde);color:#fff;border-color:var(--verde)}
+  .promo{
+    margin-top:16px;background:var(--verde-escuro);color:#fff;border-radius:16px;
+    padding:14px 16px;font-size:13.5px;
+  }
+  .promo strong{color:var(--verde-claro)}
+
   footer{text-align:center;padding:30px 0 40px;font-size:13px;color:var(--texto-suave)}
   footer a{color:var(--verde);font-weight:600;text-decoration:none}
 
@@ -156,6 +195,7 @@
     <h1 class="hero-titulo">Tecnologia sob medida para o seu negócio trabalhar menos no manual e atender melhor.</h1>
     <p class="hero-texto">Ajudo pequenos e médios negócios com agentes de IA no WhatsApp, automações e web apps simples, acessíveis e integrados ao que você já usa.</p>
     <a href="#contato" class="btn">Quero uma solução</a>
+    <p style="margin-top:14px"><a href="#planos" style="color:var(--verde);font-weight:700;font-size:14.5px">Ver planos e preços ↓</a></p>
   </div>
 </header>
 
@@ -211,6 +251,19 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="planos">
+    <h2>Planos</h2>
+    <p class="sec-sub">Valores claros, sem surpresa. Escolha um plano ou peça um orçamento sob medida.</p>
+
+    <div class="abas" role="tablist">
+      <button class="aba" role="tab" data-aba="combos" aria-selected="true">Combos</button>
+      <button class="aba" role="tab" data-aba="agentes" aria-selected="false">Agentes de IA</button>
+      <button class="aba" role="tab" data-aba="webapps" aria-selected="false">Web apps</button>
+    </div>
+
+    <div id="paineis"></div>
   </section>
 
   <section>
@@ -282,6 +335,82 @@
   const WHATSAPP_NUMERO = "5527998686886";   // DDI 55 + DDD + número, só dígitos. Ex.: 5527999999999
   const URL_PLANILHA    = "https://script.google.com/macros/s/AKfycbyNynXPbxfxt2TP3FXamrJxHJnlYeLckh2XRMfKINZfp62jhLVRx9hJR2yse1PUiYEJlg/exec"; // termina em /exec
   /* ===================================================== */
+
+  /* ===== PLANOS — edite valores e textos aqui ===== */
+  const PROMO_ATE = "31/12/2026";
+  const PLANOS = {
+    combos: {
+      sub: "Web app + agente: seu sistema e seu atendimento conversando entre si. O melhor valor.",
+      desconto: "35% off no setup",
+      itens: [
+        { nome:"Essencial", inclui:"Agente Essencial + Web app Essencial", desc:"WhatsApp com IA e app de até 3 telas", de:2400, por:1560, mes:290 },
+        { nome:"Profissional", inclui:"Agente Profissional + Web app Profissional", desc:"WhatsApp + Instagram e app com login e painel", de:4000, por:2600, mes:440, destaque:true },
+        { nome:"Completo", inclui:"Agente Completo + Web app Completo", desc:"Automações, banco de dados e vários usuários", de:6400, por:4160, mes:650 }
+      ]
+    },
+    agentes: {
+      sub: "Atendimento automático no WhatsApp e no Instagram, 24h por dia. Mensalidade inclui manutenção, suporte e plataforma.",
+      desconto: "30% off no setup",
+      itens: [
+        { nome:"Essencial", desc:"WhatsApp · responde dúvidas, preços e horários · passa para um humano quando precisa · até 2.500 créditos de IA/mês", de:800, por:560, mes:230 },
+        { nome:"Profissional", desc:"WhatsApp + Instagram · consulta estoque, agenda ou planilha · avisa a equipe na hora · até 2.500 créditos de IA/mês", de:1200, por:840, mes:310, destaque:true },
+        { nome:"Completo", desc:"Tudo do Profissional · até 3 integrações · mensagens automáticas de aniversário, recibo e retorno · até 3.500 créditos de IA/mês", de:2000, por:1400, mes:450 }
+      ]
+    },
+    webapps: {
+      sub: "Sistemas sob medida para organizar vendas, estoque, cadastros e agenda. Hospedagem fica na conta do cliente.",
+      desconto: "30% off no setup",
+      itens: [
+        { nome:"Essencial", desc:"App ligado à sua planilha · até 3 telas: cadastro, lista e relatório · funciona no celular e no computador", de:1600, por:1120, mes:80 },
+        { nome:"Profissional", desc:"Até 6 telas · login para a equipe · painel com os números do negócio · funciona no celular e no computador", de:2800, por:1960, mes:160, destaque:true },
+        { nome:"Completo", desc:"Banco de dados próprio · vários usuários e perfis de acesso · integrações com outros sistemas", de:4400, por:3080, mes:240 }
+      ]
+    }
+  };
+  const ROTULO = { combos:"Combo", agentes:"Agente de IA", webapps:"Web app" };
+  const SERVICO_FORM = { combos:["Agente de IA","Web app"], agentes:["Agente de IA"], webapps:["Web app"] };
+  /* ================================================ */
+
+  const brl = v => "R$ " + v.toLocaleString("pt-BR");
+  const paineis = document.getElementById('paineis');
+  paineis.innerHTML = Object.entries(PLANOS).map(([chave, g], i) => `
+    <div class="painel" id="painel-${chave}" role="tabpanel" ${i ? 'hidden' : ''}>
+      <p class="painel-sub">${g.sub}</p>
+      <div class="planos">
+        ${g.itens.map(p => `
+          <div class="plano${p.destaque ? ' destaque' : ''}">
+            ${p.destaque ? '<span class="selo">RECOMENDADO</span>' : ''}
+            <h3>${p.nome}</h3>
+            ${p.inclui ? `<div class="inclui">${p.inclui}</div>` : ''}
+            <p class="desc">${p.desc}</p>
+            <div class="preco">
+              <span class="de">Setup ${brl(p.de)}</span>
+              <span class="por">${brl(p.por)} <small>setup</small></span>
+              <span class="mes">+ ${brl(p.mes)}/mês</span>
+            </div>
+            <button class="btn-plano" type="button" data-grupo="${chave}" data-plano="${p.nome}">Quero este plano</button>
+          </div>`).join('')}
+      </div>
+      <div class="promo"><strong>Preço de lançamento: ${g.desconto}</strong> para projetos fechados até ${PROMO_ATE}. Precisa de algo diferente? Peça um orçamento.</div>
+    </div>`).join('');
+
+  document.querySelectorAll('.aba').forEach(aba => aba.addEventListener('click', () => {
+    document.querySelectorAll('.aba').forEach(a => a.setAttribute('aria-selected', a === aba));
+    document.querySelectorAll('.painel').forEach(p => p.hidden = p.id !== 'painel-' + aba.dataset.aba);
+  }));
+
+  paineis.addEventListener('click', e => {
+    const b = e.target.closest('.btn-plano');
+    if (!b) return;
+    const g = b.dataset.grupo;
+    document.querySelectorAll('input[name="servico"]').forEach(i => {
+      if (SERVICO_FORM[g].includes(i.value)) i.checked = true;
+    });
+    const nec = document.getElementById('necessidade');
+    const frase = `Tenho interesse no plano ${ROTULO[g]} ${b.dataset.plano}.`;
+    if (!nec.value.includes(frase)) nec.value = (frase + ' ' + nec.value).trim();
+    document.getElementById('contato').scrollIntoView({behavior:'smooth'});
+  });
 
   // Máscara simples do WhatsApp
   const tel = document.getElementById('whatsapp');
