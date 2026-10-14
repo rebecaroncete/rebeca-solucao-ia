@@ -155,6 +155,13 @@
   .plano h3{font-size:17px;font-weight:800;color:var(--verde-escuro)}
   .plano .inclui{font-size:13.5px;font-weight:600;margin-top:2px}
   .plano .desc{font-size:13.5px;color:var(--texto-suave);margin-top:4px}
+  .extras{list-style:none;margin-top:8px;font-size:12.5px;color:var(--texto);display:grid;gap:2px}
+  .extras li::before{content:"✓ ";color:var(--verde);font-weight:700}
+  .condicoes{margin-top:14px;background:var(--branco);border:1px solid var(--borda);border-radius:16px;padding:4px 16px}
+  .condicoes summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;color:var(--verde-escuro)}
+  .condicoes h4{font-size:13.5px;margin:12px 0 4px;color:var(--verde-escuro)}
+  .condicoes ul{padding-left:18px;font-size:13px;color:var(--texto-suave);margin-bottom:6px}
+  .condicoes li{margin:3px 0}
   .preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:12px}
   .preco .de{font-size:13px;color:var(--texto-suave);text-decoration:line-through}
   .preco .por{font-size:24px;font-weight:800;color:var(--verde-escuro)}
@@ -264,6 +271,43 @@
     </div>
 
     <div id="paineis"></div>
+
+    <details class="condicoes">
+      <summary>Condições de contratação</summary>
+      <h4>Preço de lançamento</h4>
+      <ul>
+        <li>Vale para projetos fechados até 31/12/2026.</li>
+        <li>Em troca, o cliente dá um depoimento, autoriza o projeto como case no Instagram e aceita permanência mínima de 6 meses.</li>
+      </ul>
+      <h4>Pagamento</h4>
+      <ul>
+        <li>Setup: 50% no início e 50% na entrega, por Pix ou transferência, sem desconto à vista.</li>
+        <li>Mensalidade: paga todo mês, a partir da entrega.</li>
+        <li>Fidelidade: 3 meses (6 meses no preço de lançamento).</li>
+        <li>Plano anual: parcelado, você ganha 1 mensalidade; à vista, ganha 2.</li>
+        <li>Validade da proposta: 15 dias.</li>
+      </ul>
+      <h4>Suporte</h4>
+      <ul>
+        <li>Segunda a sexta, das 9h às 18h, por WhatsApp e e-mail.</li>
+        <li>As horas de suporte do plano não acumulam de um mês para o outro.</li>
+        <li>Hora extra: R$ 80, em blocos de 30 minutos, sempre com aviso antes.</li>
+        <li>Todos os ajustes estão incluídos no primeiro mês de uso.</li>
+        <li>Erros da entrega são corrigidos sem custo.</li>
+        <li>Novas funções, telas, canais ou integrações são orçados à parte.</li>
+      </ul>
+      <h4>Plataformas</h4>
+      <ul>
+        <li>Créditos de IA além do limite: R$ 0,06 por crédito, cobrados na mensalidade seguinte.</li>
+        <li>O GPT Maker já está incluído na mensalidade dos agentes.</li>
+        <li>Netlify e Supabase ficam na conta do cliente e são pagos por ele, quando necessário.</li>
+      </ul>
+      <h4>Cancelamento</h4>
+      <ul>
+        <li>Agentes são desativados ao fim do período pago.</li>
+        <li>Web apps continuam com o cliente, mas sem manutenção.</li>
+      </ul>
+    </details>
   </section>
 
   <section>
@@ -340,30 +384,30 @@
   const PROMO_ATE = "31/12/2026";
   const PLANOS = {
     combos: {
-      sub: "Web app + agente: seu sistema e seu atendimento conversando entre si. O melhor valor.",
+      sub: "Web app + agente: seu sistema e seu atendimento conversando entre si. Soma dos dois planos de mesmo nível, com o maior desconto.",
       desconto: "35% off no setup",
       itens: [
-        { nome:"Essencial", inclui:"Agente Essencial + Web app Essencial", desc:"WhatsApp com IA e app de até 3 telas", de:2400, por:1560, mes:290 },
-        { nome:"Profissional", inclui:"Agente Profissional + Web app Profissional", desc:"WhatsApp + Instagram e app com login e painel", de:4000, por:2600, mes:440, destaque:true },
-        { nome:"Completo", inclui:"Agente Completo + Web app Completo", desc:"Automações, banco de dados e vários usuários", de:6400, por:4160, mes:650 }
+        { nome:"Essencial", inclui:"Agente Essencial + Web app Essencial", desc:"WhatsApp com IA e app de até 3 telas", de:2400, por:1560, mes:357, suporte:"2h" },
+        { nome:"Profissional", inclui:"Agente Profissional + Web app Profissional", desc:"WhatsApp + Instagram e app com login e painel", de:4000, por:2600, mes:527, suporte:"4h", destaque:true },
+        { nome:"Completo", inclui:"Agente Completo + Web app Completo", desc:"Integrações, mensagens automáticas, banco de dados e vários usuários", de:6400, por:4160, mes:797, suporte:"6h" }
       ]
     },
     agentes: {
-      sub: "Atendimento automático no WhatsApp e no Instagram, 24h por dia. Mensalidade inclui manutenção, suporte e plataforma.",
+      sub: "Atendimento automático no WhatsApp e no Instagram, 24h por dia. A plataforma (GPT Maker) já está incluída na mensalidade.",
       desconto: "30% off no setup",
       itens: [
-        { nome:"Essencial", desc:"WhatsApp · responde dúvidas, preços e horários · passa para um humano quando precisa · até 2.500 créditos de IA/mês", de:800, por:560, mes:230 },
-        { nome:"Profissional", desc:"WhatsApp + Instagram · consulta estoque, agenda ou planilha · avisa a equipe na hora · até 2.500 créditos de IA/mês", de:1200, por:840, mes:310, destaque:true },
-        { nome:"Completo", desc:"Tudo do Profissional · até 3 integrações · mensagens automáticas de aniversário, recibo e retorno · até 3.500 créditos de IA/mês", de:2000, por:1400, mes:450 }
+        { nome:"Essencial", desc:"Atende no WhatsApp · responde dúvidas, preços e horários · passa para um humano quando precisa", de:800, por:560, mes:297, suporte:"1h", resposta:"até 2 dias úteis", creditos:"2.500" },
+        { nome:"Profissional", desc:"Atende no WhatsApp e no Instagram · consulta 1 sistema (estoque, agenda ou planilha) · avisa a equipe", de:1200, por:840, mes:397, suporte:"2h", resposta:"até 1 dia útil", creditos:"2.500", destaque:true },
+        { nome:"Completo", desc:"Tudo do Profissional · até 3 integrações · mensagens automáticas de aniversário, recibo e retorno", de:2000, por:1400, mes:597, suporte:"3h", resposta:"1 dia útil, com prioridade", creditos:"3.500" }
       ]
     },
     webapps: {
-      sub: "Sistemas sob medida para organizar vendas, estoque, cadastros e agenda. Hospedagem fica na conta do cliente.",
+      sub: "Sistemas sob medida para organizar vendas, estoque, cadastros e agenda. A hospedagem fica na conta do cliente.",
       desconto: "30% off no setup",
       itens: [
-        { nome:"Essencial", desc:"App ligado à sua planilha · até 3 telas: cadastro, lista e relatório · funciona no celular e no computador", de:1600, por:1120, mes:80 },
-        { nome:"Profissional", desc:"Até 6 telas · login para a equipe · painel com os números do negócio · funciona no celular e no computador", de:2800, por:1960, mes:160, destaque:true },
-        { nome:"Completo", desc:"Banco de dados próprio · vários usuários e perfis de acesso · integrações com outros sistemas", de:4400, por:3080, mes:240 }
+        { nome:"Essencial", desc:"App ligado à sua planilha · até 3 telas: cadastro, lista e relatório", de:1600, por:1120, mes:80, suporte:"1h", resposta:"até 2 dias úteis" },
+        { nome:"Profissional", desc:"Até 6 telas · login para a equipe · painel com indicadores", de:2800, por:1960, mes:160, suporte:"2h", resposta:"até 1 dia útil", destaque:true },
+        { nome:"Completo", desc:"Banco de dados próprio · vários usuários e perfis de acesso · integrações", de:4400, por:3080, mes:240, suporte:"3h", resposta:"1 dia útil, com prioridade" }
       ]
     }
   };
@@ -383,6 +427,10 @@
             <h3>${p.nome}</h3>
             ${p.inclui ? `<div class="inclui">${p.inclui}</div>` : ''}
             <p class="desc">${p.desc}</p>
+            <ul class="extras">
+              <li>Suporte: ${p.suporte}/mês${p.resposta ? ` · resposta ${p.resposta}` : ''}</li>
+              ${p.creditos ? `<li>Até ${p.creditos} créditos de IA/mês</li>` : ''}
+            </ul>
             <div class="preco">
               <span class="de">Setup ${brl(p.de)}</span>
               <span class="por">${brl(p.por)} <small>setup</small></span>
@@ -391,7 +439,7 @@
             <button class="btn-plano" type="button" data-grupo="${chave}" data-plano="${p.nome}">Quero este plano</button>
           </div>`).join('')}
       </div>
-      <div class="promo"><strong>Preço de lançamento: ${g.desconto}</strong> para projetos fechados até ${PROMO_ATE}. Precisa de algo diferente? Peça um orçamento.</div>
+      <div class="promo"><strong>Preço de lançamento: ${g.desconto}</strong> para projetos fechados até ${PROMO_ATE}. Precisa de mais que o Completo? Plano sob consulta.</div>
     </div>`).join('');
 
   document.querySelectorAll('.aba').forEach(aba => aba.addEventListener('click', () => {
